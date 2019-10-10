@@ -22,7 +22,8 @@ thingsRouter
     res.json(ThingsService.serializeThing(res.thing))
   })
 
-thingsRouter.route('/:thing_id/reviews/')
+thingsRouter
+  .route('/:thing_id/reviews/')
   .all(requireAuth)
   .all(checkThingExists)
   .get((req, res, next) => {
@@ -49,6 +50,7 @@ async function checkThingExists(req, res, next) {
         error: `Thing doesn't exist`
       })
 
+    console.log(`Thing exists`);
     res.thing = thing
     next()
   } catch (error) {
